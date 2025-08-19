@@ -32,7 +32,7 @@ class lfu_cache_t {
 
     lfu_cache_t(size_t capacity): capacity_(capacity){};
 
-    /*TODO ret smth*/ void lookupUpdate(const KeyT& key, const T& value) {
+    void lookupUpdate(const KeyT& key, const T& value) {
         if (!nodes_.contains(key)) {
             if (full())
                 deleteElem();
@@ -56,7 +56,7 @@ class lfu_cache_t {
     }
 
  private:
-    /*TODO NOT VOID*/ void addNewFrequency(const frequency new_frequency) {
+        void addNewFrequency(const frequency new_frequency) {
         CacheList new_list;
         auto [it, isInserted] = lists_.insert({new_frequency, new_list});
     }
@@ -84,7 +84,6 @@ class lfu_cache_t {
 
         ++(changing_node.frequency_);
 
-        //TODO maybe we need a new list with more frequency, check it
         if (!lists_.contains(changing_node.frequency_))
             addNewFrequency(changing_node.frequency_);
 
